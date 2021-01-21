@@ -11,9 +11,10 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 let teamGroup = [];
 let employeeId = 1;
+let newEmployee;
 function createManager(){
         console.log("Build your superheroe Team")
-        console.log("Build your superheroe Team")
+        console.log("---------------------------")
         inquirer.prompt([{
             type: "input",
             name: "managerName",
@@ -45,7 +46,7 @@ function createManager(){
             }
             else
             {
-                console.log("build page");
+                buildHtml();
             }
         })
     }
@@ -54,7 +55,7 @@ function createTeam(){
     console.log("Superheroe Team")
     inquirer.prompt([{
         type: "input",
-        name: "nameEmployeee",
+        name: "nameEmployee",
         message: "What is name Employee?",
         //Validate input here
     },
@@ -70,50 +71,51 @@ function createTeam(){
         choices: ["engineer", "intern"],
     },
     {
-       when: input => {
-           return input.employeeRole == "engineer";
-       },
        type: "input",
        name: "employeeGithub",
-       message: "Whats the github of the engineer?"
+       message: "Whats the github of the engineer?",
+       when: (response) => {
+            return response.employeeRole == "engineer";
+        }
     },
     {
-        when: input => {
-            return input.employeeRole == "intern";
-        },
         type: "input",
         name: "employeeSchool",
-        message: "Whats the school of the intern?"
+        message: "Whats the school of the intern?",
+        when: (response) => {
+            return response.employeeRole == "intern";
+        }
     },
     {
         type: "list",
         name: "moreEmployee",
         message: "Add more employee??",
         choices: ["Yes", "No"]
-    }]).then((responses) => {
+    }]).then((response) => {
         employeeId++
-        if (responses.employeeRole == "engineer"){
-            const newEmployee = new Engineer(response.nameEmployee, employeeId, response.emailEmployee, response.employeeGithub)
+        if (response.employeeRole == "engineer"){
+            newEmployee = new Engineer(response.nameEmployee, employeeId, response.emailEmployee, response.employeeGithub)
         } 
         else
         {
-            const newemployee = new Intern(response.nameEmployee, employeeId, response.emailEmployee, response.employeeSchool)
+            newEmployee = new Intern(response.nameEmployee, employeeId, response.emailEmployee, response.employeeSchool)
         }
         teamGroup.push(newEmployee);
-        if (responses.moreEmployee === "Yes") {
-            console.log("Crea el team");
+        if (response.moreEmployee === "Yes") {
             createTeam();
         }
-        else
-        {
-            console.log("build page");
+        else {
+            buildHtml();
         }
     })
 }
 
-
-
-
+function buildHtml(){
+    var page = render(teamGroup);
+    fs.writeFile("./teamPage.html", page, function (err) {
+        if (err) throw err;
+    });
+}
 
 createManager();
 // Write code to use inquirer to gather information about the development team members,
