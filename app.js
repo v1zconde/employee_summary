@@ -9,8 +9,113 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+let teamGroup = [];
+let employeeId = 1;
+function createManager(){
+        console.log("Build your superheroe Team")
+        console.log("Build your superheroe Team")
+        inquirer.prompt([{
+            type: "input",
+            name: "managerName",
+            message: "What is your manager's name?",
+            //Validate input here
+        },
+        {
+            type: "input",
+            name: "managerEmail",
+            message: "What is the manager's email?" 
+        },
+        {
+            type: "input",
+            name: "managerOfficeNumber",
+            message: "What is the manager office number",
+        },
+        {
+            type: "list",
+            name: "teamMembers",
+            message: "Do you have team members?",
+            choices: ["Yes", "No"],
+        }]).then((responses) => {
+            const manager = new Manager(responses.managerName, employeeId, responses.managerEmail, responses.managerOfficeNumber)
+            console.log(manager);
+            teamGroup.push(manager);
+            if (responses.teamMembers === "Yes") {
+                console.log("Crea el team");
+                createTeam();
+            }
+            else
+            {
+                console.log("build page");
+            }
+        })
+    }
+
+function createTeam(){
+    console.log("Superheroe Team")
+    inquirer.prompt([{
+        type: "input",
+        name: "nameEmployeee",
+        message: "What is name Employee?",
+        //Validate input here
+    },
+    {
+        type: "input",
+        name: "emailEmployee",
+        message: "What is employee Email?",
+    },
+    {
+        type: "list",
+        name: "employeeRole",
+        message: "What is employee Role?",
+        choices: ["engineer", "intern"],
+    },
+    {
+       when: input => {
+           return input.employeeRole == "engineer";
+       },
+       type: "input",
+       name: "employeeGithub",
+       message: "Whats the github of the engineer?"
+    },
+    {
+        when: input => {
+            return input.employeeRole == "intern";
+        },
+        type: "input",
+        name: "employeeSchool",
+        message: "Whats the school of the intern?"
+    },
+    {
+        type: "list",
+        name: "moreEmployee",
+        message: "Add more employee??",
+        choices: ["Yes", "No"]
+    }]).then((responses) => {
+        employeeId++
+        if (responses.employeeRole == "engineer"){
+            const newEmployee = new Engineer(response.nameEmployee, employeeId, response.emailEmployee, response.employeeGithub)
+        } 
+        else
+        {
+            const newemployee = new Intern(response.nameEmployee, employeeId, response.emailEmployee, response.employeeSchool)
+        }
+        teamGroup.push(newEmployee);
+        if (responses.moreEmployee === "Yes") {
+            console.log("Crea el team");
+            createTeam();
+        }
+        else
+        {
+            console.log("build page");
+        }
+    })
+}
 
 
+
+
+
+createManager();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
