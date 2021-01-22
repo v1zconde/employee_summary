@@ -13,6 +13,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 //global variables
 let teamGroup = [];
+//this is going to be the Id for all the employees, so they dont repeat themself
 let employeeId = 1;
 let newEmployee;
 //function to create a manager
@@ -124,9 +125,9 @@ function createTeam() {
         },
         validate: (response) => {
           if (/^[a-zA-Z_-]+$/.test(response)) {
-            return "Please enter the github";
+            return true;
           }
-          return true;
+          return "Please enter correct github";
         },
       },
       {
@@ -138,9 +139,9 @@ function createTeam() {
         },
         validate: (response) => {
           if (/^[a-zA-Z]+$/.test(response)) {
-            return "Please enter a School";
+            return true;
           }
-          return true;
+          return "Please enter a School";
         },
       },
       {
@@ -180,10 +181,10 @@ function buildHtml() {
   var page = render(teamGroup);
 
   if (!fs.existsSync(OUTPUT_DIR)) {
-    fs.mkdir(OUTPUT_DIR);
+    fs.mkdirSync(OUTPUT_DIR);
   }
 //create the file html
-  fs.writeFile(outputPath, page, function (err) {
+  fs.writeFileSync(outputPath, page, function (err) {
     if (err) throw err;
   });
 }
