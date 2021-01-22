@@ -4,6 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const validator = require("validator");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -19,17 +20,35 @@ function createManager(){
             type: "input",
             name: "managerName",
             message: "What is your manager's name?",
-            //Validate input here
+            validate: (response) => {
+                if (response == "" || /\s/.test(response)){
+                    return "Please enter first or last Name";
+                };
+                return true;
+            }
         },
         {
             type: "input",
             name: "managerEmail",
-            message: "What is the manager's email?" 
+            message: "What is the manager's email?",
+            validate: (response) => {
+                if (validator.isEmail(response)){
+                    return true;
+                }
+                return "Please enter valid Email";
+                
+            } 
         },
         {
             type: "input",
             name: "managerOfficeNumber",
             message: "What is the manager office number",
+            validate: async (response) => {
+                if (isNaN(response)) {
+                    return "Please enter a Number";
+                }
+                return true;
+            }
         },
         {
             type: "list",
@@ -41,7 +60,6 @@ function createManager(){
             console.log(manager);
             teamGroup.push(manager);
             if (responses.teamMembers === "Yes") {
-                console.log("Crea el team");
                 createTeam();
             }
             else
@@ -57,12 +75,24 @@ function createTeam(){
         type: "input",
         name: "nameEmployee",
         message: "What is name Employee?",
-        //Validate input here
+        validate: (response) => {
+            if (response == "" || /\s/.test(response)){
+                return "Please enter the name of the employee";
+            };
+            return true;
+        }
+        
     },
     {
         type: "input",
         name: "emailEmployee",
         message: "What is employee Email?",
+        validate: (response) => {
+            if (validator.isEmail(response)){
+                return true;
+            }
+            return "Please enter valid Email";
+        },
     },
     {
         type: "list",
@@ -76,6 +106,12 @@ function createTeam(){
        message: "Whats the github of the engineer?",
        when: (response) => {
             return response.employeeRole == "engineer";
+        },
+        validate: (response) => {
+            if (/\s/.test(response)){
+                return "Please enter the github";
+            };
+            return true;
         }
     },
     {
@@ -84,6 +120,12 @@ function createTeam(){
         message: "Whats the school of the intern?",
         when: (response) => {
             return response.employeeRole == "intern";
+        },
+        validate: (response) => {
+            if (/\s/.test(response)){
+                return "Please enter a School";
+            };
+            return true;
         }
     },
     {
