@@ -1,8 +1,8 @@
-# Professional README Generator
+# Employee Summary - Team Generator
 
 ## Task
 
-build a software engineering team generator command line application. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. 
+Build a software engineering team generator command line application. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. 
 
 When the user has completed building the team, the application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user.
 
@@ -11,6 +11,14 @@ The application will be invoked by using the following command:
 ```bash
 node app.js
 ```
+  ## Table of Contents
+
+  1. [User Story](#user-story)
+  2. [Built With](#built-with)
+  3. [How to Use](#how-to-use)
+  4. [Submission](#submission)
+  5. [Example](#example)
+  6. [Questions](#questions)
 
 ## User Story
 
@@ -36,11 +44,14 @@ so that I have quick access to emails and GitHub profiles
 ----
 ```
   1- Type "node app.js" in the console.
-  2- Respond the questions that are going to appear in the console.
-  3- 
-  4- Watch the magic happends. Sections in the readme file created with your answers.
+  2- Create Manager - Respond the questions that are going to appear in the console.
+  3- More employees? No Problem.. Just answer Yes for more employees
+  4- Question for more employees - Intern or Engineer
+  5- Ask the right question for the role
+  6- If you hit no more Employees...
+  4- Watch the magic happends. Cards in the html file created with your employee answers.
   5- If you click in the table of content its going to take you to the right section.
-  6- Open the file and see your new readme.md
+  6- Open the file and see your new team.html
 ```    
 ### Submission
 ---
@@ -52,14 +63,14 @@ Deployed:
 [https://v1zconde.github.io/employee_summary/](https://v1zconde.github.io/employee_summary/)
 
 How to use Video: 
-[Watch Video](https://drive.google.com/file/d/1n0VDey-ckMGB1k0gQ-8ltZy7i1JWiRmp/view)
+[Watch Video](https://drive.google.com/file/d/16DR1gI9lLnXbwaZe1R0GafJ7x4BkabW-/view)
 
 
 
 ## Example
 ---
-### Readme Generator
-![Readme Example](./assets/img/full_page.png)
+### Employee Summary
+![Readme Example](./assets/img/employee-full-page.png)
 
 
   ## Questions
