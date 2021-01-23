@@ -65,7 +65,7 @@ Deployed:
 How to use Video: 
 [Watch Video](https://drive.google.com/file/d/16DR1gI9lLnXbwaZe1R0GafJ7x4BkabW-/view)
 
-
+![Example Video](./assets/img/example.gif)
 
 ## Example
 ---
