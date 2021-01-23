@@ -51,7 +51,7 @@ function createManager() {
         type: "input",
         name: "managerOfficeNumber",
         message: "What is the manager office number",
-        validate: async (response) => {
+        validate: (response) => {
           if (isNaN(response)) {
             return "Please enter a Number";
           }

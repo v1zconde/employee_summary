@@ -8,17 +8,19 @@ When the user has completed building the team, the application will create an HT
 
 The application will be invoked by using the following command:
 
-```bash
+```
 node app.js
 ```
   ## Table of Contents
 
   1. [User Story](#user-story)
   2. [Built With](#built-with)
-  3. [How to Use](#how-to-use)
-  4. [Submission](#submission)
-  5. [Example](#example)
-  6. [Questions](#questions)
+  3. [How to Install](#how-to-install)
+  4. [How to Test](#how-to-test)
+  5. [How to Use](#how-to-use)
+  6. [Submission](#submission)
+  7. [Example](#example)
+  8. [Questions](#questions)
 
 ## User Story
 
@@ -39,6 +41,17 @@ so that I have quick access to emails and GitHub profiles
     - validator (for some validation)
     - jest (for tests)
 ```    
+### How to Install
+----
+```
+npm i
+```
+
+### How to Test
+----
+```
+npm test
+```
 
 ### How to Use
 ----
