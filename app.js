@@ -153,6 +153,7 @@ function createTeam() {
     ])
     .then((response) => {
       employeeId++;
+
       if (response.employeeRole == "engineer") {
         newEmployee = new Engineer(
           response.nameEmployee,
@@ -183,8 +184,8 @@ function buildHtml() {
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR);
   }
-//create the file html
-  fs.writeFileSync(outputPath, page, function (err) {
+  //create the file html
+  fs.writeFile(outputPath, page, function (err) {
     if (err) throw err;
   });
 }
