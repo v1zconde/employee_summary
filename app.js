@@ -52,7 +52,7 @@ function createManager() {
         name: "managerOfficeNumber",
         message: "What is the manager office number",
         validate: (response) => {
-          if (isNaN(response)) {
+          if (isNaN(response) || response === "") {
             return "Please enter a Number";
           }
           return true;
