@@ -6,6 +6,7 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 const validator = require("validator");
+var figlet = require('figlet');
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -17,9 +18,18 @@ let teamGroup = [];
 let employeeId = 1;
 let newEmployee;
 //function to create a manager
+
+figlet('Welcome Team!!', function(err, data) {
+  if (err) {
+      console.log('Something went wrong...');
+      console.dir(err);
+      return;
+  }
+  console.log(data)
+  createManager();
+});
+
 function createManager() {
-  console.log("Build your superheroe Team");
-  console.log("---------------------------");
   inquirer
     .prompt([
       {
@@ -190,7 +200,8 @@ function buildHtml() {
   });
 }
 //function init
-createManager();
+
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
